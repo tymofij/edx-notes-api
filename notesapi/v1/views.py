@@ -19,7 +19,7 @@ from notesapi.v1.models import Note
 from notesapi.v1.serializers import NoteSerializer, NotesElasticSearchSerializer
 
 if not settings.ES_DISABLED:
-    from notesserver.highlight import SearchQuerySet
+    from haystack.query import SearchQuerySet
 
 log = logging.getLogger(__name__)
 
