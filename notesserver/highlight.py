@@ -7,24 +7,9 @@ and subclassed ElasticsearchSearchBackend which passes them to ES
 import haystack
 from haystack.backends.elasticsearch_backend import (
     ElasticsearchSearchEngine as OrigElasticsearchSearchEngine,
-    ElasticsearchSearchQuery as OrigElasticsearchSearchQuery,
+    ElasticsearchSearchQuery,
     ElasticsearchSearchBackend as OrigElasticsearchSearchBackend)
-from haystack.query import SearchQuerySet as OrigSearchQuerySet
-
-
-class SearchQuerySet(OrigSearchQuerySet):
-    def highlight(self, **kwargs):
-        """Adds highlighting to the results."""
-        clone = self._clone()
-        clone.query.add_highlight(**kwargs)
-        return clone
-
-
-class ElasticsearchSearchQuery(OrigElasticsearchSearchQuery):
-    def add_highlight(self, **kwargs):
-        """Adds highlighting to the search results."""
-        self.highlight = kwargs or True
-
+from haystack.query import SearchQuerySet
 
 class ElasticsearchSearchBackend(OrigElasticsearchSearchBackend):
     """
